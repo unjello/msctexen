@@ -63,7 +63,7 @@ latex, by adding/changing "shell_escape = t" in your texmf.cnf
 
 MANIFEST
 
-The program curves consists of the following files:
+The program msctexen consists of the following files:
 
 Name               Description
 ----------------------------------------------------------
