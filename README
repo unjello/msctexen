@@ -1,0 +1,73 @@
+%% This is file `README'.
+%% Copyright (C) 2010 Andrzej Lichnerowicz
+%% Because some of the code I've based on
+%% http://www.imada.sdu.dk/~ehmsen/python.sty by Martin R. Ehmsen
+%% this package may be distributed under the terms 
+%% of the GNU GPL Licence v2+.
+%% See file msctexen.sty for details.
+%% Internet: angelo@irc.pl
+
+The MscTeXen package version 0.1 of 2010/11/18.
+
+DESCRIPTION
+
+This package let's you embed mscgen by Michael McTernan in your LaTeX2e
+document. Drawing MSCs (Message Sequence Charts) in your documentation
+never was so easy - thanks to Michael, for this great tool.
+
+The package generates eps, converts it to pdf and \includegraphics it.
+
+EXAMPLE
+
+\begin{figure}\begin{center}
+\begin{msc}
+msc {
+  hscale = "2";
+
+  a,b,c;
+
+  a->b [ label = "ab()" ] ;
+  b->c [ label = "bc(TRUE)"];
+  c=>c [ label = "process(1)" ];
+  c=>c [ label = "process(2)" ];
+  ...;
+  c=>c [ label = "process(n)" ];
+  c=>c [ label = "process(END)" ];
+  a<<=c [ label = "callback()"];
+  ---  [ label = "If more to run", ID="*" ];
+  a->a [ label = "next()"];
+  a->c [ label = "ac1()\nac2()"];
+  b<-c [ label = "cb(TRUE)"];
+  b->b [ label = "stalled(...)"];
+  a<-b [ label = "ab() = FALSE"];
+}
+\end{msc}
+\end{center}\end{figure}
+
+That's it. For more information on mscgen syntax go to:
+http://www.mcternan.me.uk/mscgen/
+ 
+INSTALLATION 
+
+To install msctexen you need to put `msctexen.sty' on your TeX search path
+as root or administrator and run `mktexlsr' or equivalent to update
+the TeX file databases.
+
+You need to have mscgen in your exec path. You can download it from:
+http://www.mcternan.me.uk/mscgen/
+
+Shell-escape needs to be activated for mscgen to work.
+This can either be done by passing -shell-escape as an option to
+latex, by adding/changing "shell_escape = t" in your texmf.cnf
+
+
+MANIFEST
+
+The program curves consists of the following files:
+
+Name               Description
+----------------------------------------------------------
+README             This file.
+msctexen.sty       Used by LaTeX to have msctexen environment.
+
+%% End of file `README'. 
