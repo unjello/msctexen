@@ -26,6 +26,7 @@
 % latex, by adding/changing "shell_escape = t" in your texmf.cnf
 % For details on Mscgen syntax see http://www.mcternan.me.uk/mscgen/
 
+\immediate\write18{mkdir -p msc}
 \newwrite\@out
 \newcommand{\mscwidth}{\linewidth}
 \begingroup \catcode `|=0 \catcode `[=1
@@ -47,6 +48,7 @@
 \def\endmsc{%
 \endgroup
 \immediate\closeout\@out
+
 \immediate\write18{mscgen -T eps -i \mscfname.mscg -o \mscfname.eps >\mscfname.out 2> \mscfname.err}
 \immediate\write18{epstopdf --gsopt=-dEPSCrop \mscfname.eps}
 {\includegraphics[width=\msc@width]{\mscfname}}}
