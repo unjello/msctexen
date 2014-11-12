@@ -1,13 +1,13 @@
 %% This is file `README'.
-%% Copyright (C) 2010 Andrzej Lichnerowicz
+%% Copyright (C) 2010-2014 Andrzej Lichnerowicz
 %% Because some of the code I've based on
 %% http://www.imada.sdu.dk/~ehmsen/python.sty by Martin R. Ehmsen
 %% this package may be distributed under the terms 
 %% of the GNU GPL Licence v2+.
 %% See file msctexen.sty for details.
-%% Internet: angelo@irc.pl
+%% Internet: andrzej@lichnerowicz.pl
 
-The MscTeXen package version 0.1 of 2010/11/18.
+The MscTeXen package version 0.2.0 of 2014/11/12.
 
 DESCRIPTION
 
