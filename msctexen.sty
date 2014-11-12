@@ -16,7 +16,7 @@
 % Author: Andrzej Lichnerowicz (andrzej@lichnerowicz.pl)
 % This code is based on http://www.imada.sdu.dk/~ehmsen/python.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{msctexen}[2014/11/03 v0.1.1 Embed Mscgen in LaTeX]
+\ProvidesPackage{msctexen}[2014/11/12 v0.1.2 Embed Mscgen in LaTeX]
 \RequirePackage{keyval}
 \RequirePackage{graphicx}
 
@@ -36,8 +36,8 @@
 \define@key{msc}{width}{\def\msc@width{#1}}
 \def\msc{\kernel@ifnextchar [{\@msc}{\@msc[]}}
 \newcounter{msc@codenum}
+\setkeys{msc}{width=\mscwidth}
 \def\@msc[#1]{%
-\let\msc@width=\mscwidth
 \setkeys{msc}{#1}\stepcounter{msc@codenum}
 \gdef\mscfname{msc/\jobname-\themsc@codenum}
 \immediate\openout\@out=\mscfname.mscg
