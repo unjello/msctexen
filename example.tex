@@ -1,16 +1,74 @@
 % !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
-\documentclass[11pt]{article} 
-\usepackage[utf8]{inputenc} 
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
 \usepackage{msctexen}
 
 \begin{document}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt risus placerat sapien interdum viverra. Integer accumsan leo quis nibh.
 
+% insert msc. plan and simple.
 \begin{figure}[htb]
 \begin{center}
 \begin{msc}
+msc {
+  hscale = "2";
+
+  a,b,c;
+
+  a->b [ label = "ab()" ] ;
+  b->c [ label = "bc(TRUE)"];
+  c=>c [ label = "process(1)" ];
+  c=>c [ label = "process(2)" ];
+  ...;
+  c=>c [ label = "process(n)" ];
+  c=>c [ label = "process(END)" ];
+  a<<=c [ label = "callback()"];
+  ---  [ label = "If more to run", ID="*" ];
+  a->a [ label = "next()"];
+  a->c [ label = "ac1()\nac2()"];
+  b<-c [ label = "cb(TRUE)"];
+  b->b [ label = "stalled(...)"];
+  a<-b [ label = "ab() = FALSE"];
+}
+\end{msc}
+\end{center}
+\end{figure}
+
+% adjust figure width
+\begin{figure}[htb]
+\begin{center}
+\begin{msc}[width=5cm]
+msc {
+  hscale = "2";
+
+  a,b,c;
+
+  a->b [ label = "ab()" ] ;
+  b->c [ label = "bc(TRUE)"];
+  c=>c [ label = "process(1)" ];
+  c=>c [ label = "process(2)" ];
+  ...;
+  c=>c [ label = "process(n)" ];
+  c=>c [ label = "process(END)" ];
+  a<<=c [ label = "callback()"];
+  ---  [ label = "If more to run", ID="*" ];
+  a->a [ label = "next()"];
+  a->c [ label = "ac1()\nac2()"];
+  b<-c [ label = "cb(TRUE)"];
+  b->b [ label = "stalled(...)"];
+  a<-b [ label = "ab() = FALSE"];
+}
+\end{msc}
+\end{center}
+\end{figure}
+
+% create png instead of eps. some systems cannot handle utf8 with
+% eps.
+\begin{figure}[htb]
+\begin{center}
+\begin{msc}[format=png]
 msc {
   hscale = "2";
 
