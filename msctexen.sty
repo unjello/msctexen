@@ -16,9 +16,10 @@
 % Author: Andrzej Lichnerowicz (andrzej@lichnerowicz.pl)
 % This code is based on http://www.imada.sdu.dk/~ehmsen/python.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{msctexen}[2014/11/12 v0.1.2 Embed Mscgen in LaTeX]
+\ProvidesPackage{msctexen}[2014/11/12 v0.2.0 Embed Mscgen in LaTeX]
 \RequirePackage{keyval}
 \RequirePackage{graphicx}
+\RequirePackage{etoolbox}
 
 % Note: shell-escape needs to be activated for mscgen to work.
 % (epstopdf still works, so you'll get missing input file error)
@@ -34,9 +35,10 @@
 \catcode`\\=12 |gdef|@xmsc#1\end{msc}[|immediate|write|@out[#1]|end[msc]]
 |endgroup
 \define@key{msc}{width}{\def\msc@width{#1}}
+\define@key{msc}{format}{\def\msc@format{#1}}
 \def\msc{\kernel@ifnextchar [{\@msc}{\@msc[]}}
 \newcounter{msc@codenum}
-\setkeys{msc}{width=\mscwidth}
+\setkeys{msc}{width=\mscwidth, format=eps}
 \def\@msc[#1]{%
 \setkeys{msc}{#1}\stepcounter{msc@codenum}
 \gdef\mscfname{msc/\jobname-\themsc@codenum}
@@ -48,7 +50,13 @@
 \def\endmsc{%
 \endgroup
 \immediate\closeout\@out
-
-\immediate\write18{mscgen -T eps -i \mscfname.mscg -o \mscfname.eps >\mscfname.out 2> \mscfname.err}
-\immediate\write18{epstopdf --gsopt=-dEPSCrop \mscfname.eps}
-{\includegraphics[width=\msc@width]{\mscfname}}}
+\def\@eps{eps}
+\def\@png{png}
+\ifdefequal{\msc@format}{\@eps}{
+  \immediate\write18{mscgen -T eps -i \mscfname.mscg -o \mscfname.eps >\mscfname.out 2> \mscfname.err}
+  \immediate\write18{epstopdf --gsopt=-dEPSCrop \mscfname.eps}
+}{
+\ifdefequal{\msc@format}{\@png}{
+  \immediate\write18{mscgen -T png -i \mscfname.mscg -o \mscfname.png >\mscfname.out 2> \mscfname.err}
+}{}}
+{\includegraphics[width=\msc@width]{\mscfname.\msc@format}}}
