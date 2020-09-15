@@ -27,7 +27,7 @@
 % latex, by adding/changing "shell_escape = t" in your texmf.cnf
 % For details on Mscgen syntax see http://www.mcternan.me.uk/mscgen/
 
-\immediate\write18{mkdir -p msc}
+\immediate\write18{mkdir msc}
 \newwrite\@out
 \newcommand{\mscwidth}{\linewidth}
 \begingroup \catcode `|=0 \catcode `[=1
@@ -53,10 +53,10 @@
 \def\@eps{eps}
 \def\@png{png}
 \ifdefequal{\msc@format}{\@eps}{
-  \immediate\write18{mscgen -T eps -i \mscfname.mscg -o \mscfname.eps >\mscfname.out 2> \mscfname.err}
+  \immediate\write18{mscgen -T eps -S signalling -i \mscfname.mscg -o \mscfname.eps >\mscfname.out 2> \mscfname.err}
   \immediate\write18{epstopdf --gsopt=-dEPSCrop \mscfname.eps}
 }{
 \ifdefequal{\msc@format}{\@png}{
-  \immediate\write18{mscgen -T png -i \mscfname.mscg -o \mscfname.png >\mscfname.out 2> \mscfname.err}
+  \immediate\write18{mscgen -T png -S signalling -i \mscfname.mscg -o \mscfname.png >\mscfname.out 2> \mscfname.err}
 }{}}
-{\includegraphics[width=\msc@width]{\mscfname.\msc@format}}}
+{\includegraphics[trim=0 15 0 0,clip,width=\msc@width]{\mscfname.\msc@format}}}
