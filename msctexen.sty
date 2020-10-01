@@ -27,12 +27,12 @@
 % latex, by adding/changing "shell_escape = t" in your texmf.cnf
 % For details on Mscgen syntax see http://www.mcternan.me.uk/mscgen/
 
-\immediate\write18{mkdir msc}
+\immediate\write18{mkdir msc 2> nul}
 \newwrite\@out
 \newcommand{\mscwidth}{\linewidth}
 \begingroup \catcode `|=0 \catcode `[=1
 \catcode`]=2 \catcode `\{=12 \catcode `\}=12
-\catcode`\\=12 |gdef|@xmsc#1\end{msc}[|immediate|write|@out[#1]|end[msc]]
+\catcode`\\=12 |gdef|@xmsc#1\end{msc}[|immediate|write|@out[|unexpanded|expandafter[#1]]|end[msc]]
 |endgroup
 \define@key{msc}{width}{\def\msc@width{#1}}
 \define@key{msc}{format}{\def\msc@format{#1}}
